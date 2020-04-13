@@ -1,5 +1,17 @@
 <html>
  <head>
+     <style>
+         body{
+             padding: 10px;
+         }
+         
+         #addbtn{
+             margin-bottom: 5px;
+         }
+         
+         
+     
+     </style>
      
      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   
@@ -22,11 +34,10 @@
     <tr><th><label for="quantity">Quantity</label></th>
         <th><input type="number" id="quantity" placeholder="Quantity Required"></th>
    
-        <p id="added"></p>
-<tr><th><button type="button" onclick="add()">Add</button></th></tr>
-<tr><th><input type="submit" value="Submit" /></th></tr></tr></table>
+<tr><th><button type="button" id="addbtn" class="btn btn-light" onclick="add()">Add</button></th></tr>
       </div>
-    <table class="table table-primary">
+        <form action="dataEntry" method="post">
+        <table class="table table-primary">
         <tr class="bg-info">
         <th>Serial No.</th>
         <th>Item</th>
@@ -34,6 +45,9 @@
             </tr>
         <tbody id="myTable"></tbody>
     </table>
+<tr><th><input type="submit" class="btn btn-primary" value="Submit"/></th></tr></tr></table>
+</form>
+<p id="debug"></p>
 <script>
     
     var i=0
@@ -42,8 +56,7 @@
     var quant=[n]
     
     function add(){
-        var added = document.getElementById("added")
-        added.innerHTML = document.getElementById("drop").value
+        var added = document.getElementById("debug")
         var table = document.getElementById("myTable")
         var quanity = document.getElementById("quantity");
         var drop = document.getElementById("drop")
@@ -53,8 +66,8 @@
         var row=`
                     <tr>
                     <td>${i+1}</td>
-                    <td>${item[i]}</td>
-                    <td>${quant[i]}</td>
+                    <td name=${"item"+i}>${item[i]}</td>
+                    <td name=${"quantity"+i}>${quant[i]}</td>
                     </tr>
 
                     `
@@ -63,6 +76,7 @@
         i++
         quanity.value=0
         drop.selectedIndex++
+        
         
     }
     </script>
